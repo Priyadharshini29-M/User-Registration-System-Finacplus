@@ -1,0 +1,59 @@
+
+.addUser{
+    width: 25%;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    margin: 40px auto;
+    padding: 45px;
+    overflow: hidden;
+}
+.head-div{
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+.addUserForm{
+    margin-top: 15px;
+}
+
+.addUserForm .inputGroup{
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+}
+
+.addUserForm .inputGroup label{
+    margin-bottom: 5px;
+}
+.addUserForm .inputGroup input{
+    margin-bottom: 10px;
+    padding: 10px;
+    outline: none;
+}
+
+.addUserForm .inputGroup button{
+    border: 0;
+    outline: none;
+    background-color: rgb(243, 205, 243);
+    color: rgb(104, 100, 100);
+    font-weight: bolder;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    margin-top: 20px;
+}
+
+.addUserForm .inputGroup select{
+    margin-bottom: 10px;
+    padding: 10px;
+    outline: none;
+}
+.addUserForm .inputGroup textarea{
+    margin-bottom: 10px;
+    padding: 10px;
+    outline: none;
+}
