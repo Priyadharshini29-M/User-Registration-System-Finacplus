@@ -63,7 +63,7 @@ const Add = () => {
       }
       console.log("Form Data:", user);
 
-      try {
+      try {  //submit this using an API call
         const response = await axios.post('http://localhost:5000/api/create', user);
         toast.success(response.data.msg, { position: "top-right" });
         navigate('/');
