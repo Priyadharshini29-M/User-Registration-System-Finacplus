@@ -30,6 +30,23 @@ const Add = () => {
    const inputHandler = (e) => {
       const { name, value } = e.target;
       setUser({ ...user, [name]: value });
+
+      
+      if (name === 'dateOfBirth') {
+         calculateAge(value);
+      }
+   };
+
+   const calculateAge = (dob) => {
+      if (!dob) return;
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+         age--;
+      }
+      setUser(prevUser => ({ ...prevUser, age: age.toString() })); 
    };
 
    const validateForm = () => {
@@ -47,7 +64,8 @@ const Add = () => {
          errors.password = 'Password must be at least 10 characters and include a digit';
      }
      if (!user.gender) {
-  }
+         errors.gender = 'Gender is required';
+     }
      if (user.about.length > 5000) {
          errors.about = 'About section cannot exceed 5000 characters';
      }
@@ -63,7 +81,7 @@ const Add = () => {
       }
       console.log("Form Data:", user);
 
-      try {  //submit this using an API call
+      try {
         const response = await axios.post('http://localhost:5000/api/create', user);
         toast.success(response.data.msg, { position: "top-right" });
         navigate('/');
@@ -85,7 +103,8 @@ const Add = () => {
             </div>
             <div className='inputGroup'>
                <label htmlFor='age'>Age</label>
-               <input type="number" onChange={inputHandler} id="age" name="age" autoComplete='off' placeholder='Enter Your Age' />
+              
+               <input type="number" id="age" name="age" value={user.age} readOnly />
                {errors.age && <p className="error">{errors.age}</p>}
             </div>
             <div className='inputGroup'>
@@ -99,13 +118,14 @@ const Add = () => {
                {errors.dateOfBirth && <p className="error">{errors.dateOfBirth}</p>}
             </div>
             <div className='inputGroup'>
-            <label htmlFor='gender'>Gender</label>
-            <select name="gender" value={user.gender} onChange={inputHandler}>
+               <label htmlFor='gender'>Gender</label>
+               <select name="gender" value={user.gender} onChange={inputHandler}>
                   <option value="">Select Gender</option>
                   {genders.map(gender => (
                      <option key={gender} value={gender}>{gender}</option>
                   ))}
-                  </select>
+               </select>
+               {errors.gender && <p className="error">{errors.gender}</p>}
             </div>
             <div className='inputGroup'>
                <label htmlFor='about'>About</label>
@@ -113,7 +133,7 @@ const Add = () => {
                {errors.about && <p className="error">{errors.about}</p>}
             </div>
             <div className='inputGroup'>
-               <button type="submit" onClick={submitForm}>SUBMIT FORM</button>
+               <button type="submit">SUBMIT FORM</button>
             </div>
          </form>
       </div>
